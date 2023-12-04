@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title','Menu Admin')
+@section('title','Menu Divisi')
 
 @section('contents')
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Admin</h1>
+        <h1>Divisi</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('Dashboard.dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active">Admin</li>
+                <li class="breadcrumb-item active">Divisi</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="{{ route('admins.create') }}" class="btn btn-primary">Tambah</a>
+                            <a href="{{ route('divisis.create') }}" class="btn btn-primary">Tambah</a>
                         </h5>
                         @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
@@ -37,10 +37,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Jabatan</th>
-                                    <th scope="col">No Hp</th>
-                                    <th scope="col">Kelamin</th>
+                                    <th scope="col">Name</th>
                                     <th scope="">Aksi</th>
                                 </tr>
                             </thead>
@@ -50,20 +47,17 @@
                                 $i=1;
                                 @endphp
 
-                                @forelse($admins as $admin)
+                                @forelse($divisis as $divisi)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $admin->Nama }}</td>
-                                    <td>{{ $admin->Jabatan }}</td>
-                                    <td>{{ $admin->Nohp }}</td>
-                                    <td>{{ $admin->Kelamin }}</td>
+                                    <td>{{ $divisi->nama_divisi }}</td>
                                     <td>
-                                        <a href="{{ route('admins.edit', ['id' => $admin->id]) }}"
+                                        <a href="{{ route('divisis.edit', ['id' => $divisi->id]) }}"
                                             class="btn btn-warning ">Edit</a>
                                         <a class="btn btm-sm btn-danger delete-btn"
-                                            data-id="{{ $admin->id }}">Delete</a>
-                                        <form id="delete-row-{{ $admin->id }}"
-                                            action="{{ route('admins.destroy', ['id' => $admin->id]) }}" method="POST">
+                                            data-id="{{ $divisi->id }}">Delete</a>
+                                        <form id="delete-row-{{ $divisi->id }}"
+                                            action="{{ route('divisis.destroy', ['id' => $divisi->id]) }}" method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
                                             @csrf
                                         </form>
@@ -101,7 +95,7 @@
         deleteLinks.forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
-                const adminId = this.getAttribute('data-id');
+                const divisiId = this.getAttribute('data-id');
 
                 Swal.fire({
                     title: 'Yakin Hapus Data?',
@@ -113,7 +107,7 @@
                     confirmButtonText: 'Yes!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        const form = document.getElementById(`delete-row-${adminId}`);
+                        const form = document.getElementById(`delete-row-${divisiId}`);
                         form.submit();
                     }
                 });

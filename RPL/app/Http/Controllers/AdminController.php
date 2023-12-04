@@ -29,7 +29,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $title='Menu Admin';
+        $title='Tambah  Admin';
         
         return view('admins.create',compact('title'));
     }
@@ -68,7 +68,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $title='Menu Admin';
+        $title='Edit Admin';
         $admin = Admin::findOrFail($id);
         return view('admins.edit', compact('title'),['admin' => $admin]);
     }

@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.apps')
 
-@section('title','Dashboard Admin')
+@section('title','Dashboard Pengurus')
 
 @section('contents');
 
@@ -10,7 +10,7 @@
     <h1>Dashboard</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('Dashboard.dashboard') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Dashboard.dashboard_pengurus') }}">Home</a></li>
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </nav>
