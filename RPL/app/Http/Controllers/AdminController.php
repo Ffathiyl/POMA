@@ -17,7 +17,7 @@ class AdminController extends Controller
     public function index()
     {
         $title='Menu Admin';
-        $admin = Admin::all();
+        $admin = Admin::all()->where('Status','=','1');
 
         return view('admins.index', compact('title'),['admins' => $admin]);
     }
@@ -88,7 +88,7 @@ class AdminController extends Controller
         if ($admin->update($params)) {
             $admin->save();
 
-            return redirect(route('admins.index'))->with('success', 'Updated!');
+            return redirect(route('admins.index'))->with('success', 'Data Berhasil Diperbarui!');
         }
     }
 
@@ -100,11 +100,12 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $admin = Admin::findOrFail($id);
+        $admin = Admin::where('id',$id)->firstOrFail();
 
-        if ($admin->delete()) {
+        if($admin->update(['Status' => 0])){
             return redirect(route('admins.index'))->with('success', 'Deleted!');
+        } else {
+            return redirect(route('admins.index'))->with('error', 'Gagal Hapus Data!');
         }
-        return redirect(route('admins.index'))->with('error', 'Sorry, unable to delete this!');
     }
 }

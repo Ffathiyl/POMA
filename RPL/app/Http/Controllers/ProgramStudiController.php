@@ -20,7 +20,7 @@ class ProgramStudiController extends Controller
     {
         //
         $title='Menu Program Studi';
-        $programStudi = ProgramStudi::all();
+        $programStudi = ProgramStudi::all()->where('status','=','1');
 
         return view('programStudis.index', compact('title'),['programStudis' => $programStudi]);
     }
@@ -111,11 +111,12 @@ class ProgramStudiController extends Controller
     public function destroy($id)
     {
         //
-        $programStudi = ProgramStudi::findOrFail($id);
+        $prodi = ProgramStudi::where('id',$id)->firstOrFail();
 
-        if ($programStudi->delete()) {
-            return redirect(route('programStudis.index'))->with('success', 'Deleted!');
+        if($prodi->update(['Status' => 0])){
+            return redirect(route('programStudis.index'))->with('success', 'Data Berhasil Dihapus!');
+        } else {
+            return redirect(route('programStudis.index'))->with('error', 'Gagal Hapus Data!');
         }
-        return redirect(route('programStudis.index'))->with('error', 'Sorry, unable to delete this!');
     }
 }

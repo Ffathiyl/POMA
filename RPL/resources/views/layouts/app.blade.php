@@ -91,7 +91,7 @@
   <script>
     console.log('Error');
     Swal.fire({
-      title: 'Login Gagal',
+      title: 'Pesan',
       text: '{{ Session::get('error') }}',
       icon: 'error'
     });
@@ -102,7 +102,7 @@
   <script>
     console.log('success');
     Swal.fire({
-      title: 'Berhasil Login',
+      title: 'Pesan',
       text: '{{ Session::get('success') }}',
       icon: 'success'
     });

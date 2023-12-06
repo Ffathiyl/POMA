@@ -104,9 +104,9 @@ class PengurusController extends Controller
     public function destroy($nim)
     {
         
-        $admin = Pengurus::where('Nim',$nim)->firstOrFail();
+        $pengurus = Pengurus::where('Nim',$nim)->firstOrFail();
 
-        if($admin->update(['Status' => 0])){
+        if($pengurus->update(['Status' => 0])){
             return redirect(route('pengurus.index'))->with('success', 'Deleted!');
         } else {
             return redirect(route('pengurus.index'))->with('error', 'Gagal Hapus Data!');

@@ -59,12 +59,12 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">Login</h5>
 
-                            @if (session('success'))
+                            <!-- @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
                             @if (session('error'))
                             <div class="alert alert-danger">{{ session('error') }}</div>
-                            @endif
+                            @endif -->
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{ route('logins.auth') }}" method="POST">
                                 @csrf
@@ -113,7 +113,7 @@
     <script>
         console.log('Error');
         Swal.fire({
-            title: 'Login Gagal!',
+            title: 'Pesan',
             text: '{{ Session::get('error') }}',
             icon: 'error'
         });
@@ -124,7 +124,7 @@
     <script>
         console.log('success');
         Swal.fire({
-            title: 'Logout Berhasil',
+            title: 'Pesan',
             text: '{{ Session::get('successLogout') }}',
             icon: 'success'
         });

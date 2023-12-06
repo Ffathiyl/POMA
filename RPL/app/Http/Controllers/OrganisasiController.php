@@ -19,7 +19,7 @@ class OrganisasiController extends Controller
     {
         //
         $title = 'Menu Organisasi';
-        $organisasi = Organisasi::all();
+        $organisasi = Organisasi::all()->where('status','=','1');
 
         return view('organisasis.index', compact('title'), ['organisasis' => $organisasi]);
     }
@@ -111,11 +111,12 @@ class OrganisasiController extends Controller
     public function destroy($id)
     {
         //
-        $organisasi = Organisasi::findOrFail($id);
+        $organisasi = Organisasi::where('id',$id)->firstOrFail();
 
-        if ($organisasi->delete()) {
+        if($organisasi->update(['Status' => 0])){
             return redirect(route('organisasis.index'))->with('success', 'Deleted!');
+        } else {
+            return redirect(route('organisasis.index'))->with('error', 'Gagal Hapus Data!');
         }
-        return redirect(route('organisasis.index'))->with('error', 'Sorry, unable to delete this!');
     }
 }

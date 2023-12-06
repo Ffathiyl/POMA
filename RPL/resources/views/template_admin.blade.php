@@ -15,12 +15,22 @@
         </li><!-- End Dashboard Nav -->
 
         <!-- Master Nav -->
+        <li class="nav-heading">Pages</li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ str_contains(strtolower($title), 'penilaian') ? '' : 'collapsed' }}"
+                href="#">
+                <i class="bi bi-file-pdf"></i><span style="color :#000000">Hasil Penilaian</span><i></i>
+            </a>
+        </li><!-- End Program Studi Nav -->
+
+        <!-- Master Nav -->
         <li class="nav-heading">Master</li>
 
         <li class="nav-item">
             <a class="nav-link {{ str_contains(strtolower($title), 'admin') ? '' : 'collapsed' }}"
                 href="{{ route('admins.index') }}">
-                <i class="bi bi-person"></i><span style="color :#000000">Admin</span><i></i>
+                <i class="bi bi-person-plus-fill"></i><span style="color :#000000">Admin</span><i></i>
             </a>
         </li><!-- End Admin Nav -->
 
@@ -34,7 +44,7 @@
         <li class="nav-item">
             <a class="nav-link {{ str_contains(strtolower($title), 'divisi') ? '' : 'collapsed' }}"
                 href="{{ route('divisis.index') }}">
-                <i class="bi bi-x-diamond-fill"></i><span style="color :#000000">Divisi</span><i></i>
+                <i class="bi bi-map-fill"></i><span style="color :#000000">Divisi</span><i></i>
             </a>
         </li><!-- End Divisi Nav -->
 
@@ -58,6 +68,8 @@
                 <i class="bi bi-people-fill"></i><span style="color :#000000">Program Studi</span><i></i>
             </a>
         </li><!-- End Program Studi Nav -->
+
+        
 
         <li class="nav-heading">Settings</li>
 
