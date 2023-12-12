@@ -15,6 +15,9 @@ class Pengurus extends Authenticatable
         'Nim',
         'Nama',
         'organisasi_id',
+        'divisi_id',
+        'jabatan_id',
+        'program_studi_id',
         'Password',
         'Status',
         'modified_by',
@@ -22,5 +25,21 @@ class Pengurus extends Authenticatable
 
     public function organisasi(){
         return $this->belongsTo(Organisasi::class);
+    }
+
+    public function prodi(){
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
+    }
+    
+    public function jabatan(){
+        return $this->belongsTo(Jabatan::class,'jabatan_id');
+    }
+
+    public function divisi(){
+        return $this->belongsTo(Divisi::class,'divisi_id');
+    }
+
+    public function transaksiPenilaians(){
+        return $this->hasMany(TransaksiPenilaian::class,'pengurus_id', 'Nim');
     }
 }

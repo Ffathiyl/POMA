@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('Nim')->primary();
             $table->string('Nama');
             $table->foreignId('organisasi_id')->nullable()->constrained();
+            $table->foreignId('divisi_id')->nullable()->constrained();
+            $table->foreignId('jabatan_id')->nullable()->constrained();
+            $table->foreignId('program_studi_id')->nullable()->constrained();
             $table->string('Password');
             $table->integer('Status');
             $table->string('modified_by')->nullable();

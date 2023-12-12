@@ -15,14 +15,30 @@
         </li><!-- End Dashboard Nav -->
 
         <!-- Master Nav -->
-        <li class="nav-heading">Pages</li>
+        <li class="nav-heading">Laporan</li>
 
         <li class="nav-item">
-            <a class="nav-link {{ str_contains(strtolower($title), 'penilaian') ? '' : 'collapsed' }}"
-                href="#">
-                <i class="bi bi-file-pdf"></i><span style="color :#000000">Hasil Penilaian</span><i></i>
+        <a class="nav-link {{ str_contains(strtolower($title), 'laporan') ? '' : 'collapsed' }}" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-file-pdf-fill"></i><span>Hasil Penilaian</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-nav" class="nav-content collapse {{ str_contains(strtolower($title), 'laporan') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('laporans.index') }}" class="{{ str_contains(strtolower($title), 'pengurus') ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Pengurus Organisasi</span>
             </a>
-        </li><!-- End Program Studi Nav -->
+          </li>
+          <li>
+            <a href="{{ route('laporans.indexOrg') }}" class="{{ str_contains(strtolower($title), 'organisasi') ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Organisasi</span>
+            </a>
+          </li>
+          <li>
+            <a href="charts-echarts.html">
+              <i class="bi bi-circle"></i><span>Divisi</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Charts Nav -->
 
         <!-- Master Nav -->
         <li class="nav-heading">Master</li>
@@ -42,6 +58,13 @@
         </li><!-- End Pengurus Nav -->
 
         <li class="nav-item">
+            <a class="nav-link {{ str_contains(strtolower($title), 'organisasi') ? '' : 'collapsed' }}"
+                href="{{ route('organisasis.index') }}">
+                <i class="bi bi-wallet-fill"></i><span style="color :#000000">Organisasi</span><i></i>
+            </a>
+        </li><!-- End Organisasi Nav -->
+
+        <li class="nav-item">
             <a class="nav-link {{ str_contains(strtolower($title), 'divisi') ? '' : 'collapsed' }}"
                 href="{{ route('divisis.index') }}">
                 <i class="bi bi-map-fill"></i><span style="color :#000000">Divisi</span><i></i>
@@ -54,13 +77,6 @@
                 <i class="bi bi-list"></i><span style="color :#000000">Jabatan</span><i></i>
             </a>
         </li><!-- End Jabatan Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link {{ str_contains(strtolower($title), 'organisasi') ? '' : 'collapsed' }}"
-                href="{{ route('organisasis.index') }}">
-                <i class="bi bi-wallet-fill"></i><span style="color :#000000">Organisasi</span><i></i>
-            </a>
-        </li><!-- End Organisasi Nav -->
 
         <li class="nav-item">
             <a class="nav-link {{ str_contains(strtolower($title), 'program Studi') ? '' : 'collapsed' }}"

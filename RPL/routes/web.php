@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\PengurusesController;
 use App\Http\Controllers\JabatanController;
@@ -83,7 +84,7 @@ Route::get('dashboard/pengurus',function(){
 })->name('Dashboard.dashboard_pengurus');
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.login_pengurus');
 });
 
 //Routes Login & Logout
@@ -96,6 +97,14 @@ Route::get('Register',[AuthController::class,'Pengurus'])->name('auth.register')
 Route::post('Create/Pengurus',[AuthController::class,'CreatePengurus'])->name('auth.create_pengurus');
 Route::get('logout/pengurus',[AuthController::class,'logoutPengurus'])->name('logins.logoutPengurus');
 
-Route::get('Pengurus/Kuisioner',[PengurusesController::class,'kuis'])->name('penguruses.kuisioner');
-Route::get('Dashboard/Pengurus',[PengurusesController::class,'psiko'])->name('penguruses.psikologi');
+//Routes Pengurus dan Penilaian
+Route::get('Pengurus/Kuisioner/{Nim}',[PengurusesController::class,'kuis'])->name('penguruses.kuisioner');
+Route::post('Penilaian/{Nim}',[PengurusesController::class,'store'])->name('penguruses.store');
+Route::get('Pengurus/Penilaian',[PengurusesController::class,'penilaian'])->name('penguruses.index');
 
+
+//Routes Laporan Penilaian
+Route::get('Laporan',[LaporanController::class,'index'])->name('laporans.index');
+Route::get('Laporan/Pengurus/{Nim}',[LaporanController::class,'detail'])->name('laporans.detail');
+Route::get('Laporan/Organisasi',[LaporanController::class,'indexOrg'])->name('laporans.indexOrg');
+Route::get('Laporan/Organisasi/{id}',[LaporanController::class,'detailOrg'])->name('laporans.detailOrg');

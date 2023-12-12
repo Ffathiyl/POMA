@@ -19,16 +19,10 @@
             <li class="nav-heading">Master</li>
 
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(strtolower($title), 'kuis') ? '' : 'collapsed' }}" href="{{ route('penguruses.kuisioner') }}">
-                    <i class="bi bi-people-fill"></i><span style="color :#000000">Kuisioner</span><i></i>
+                <a class="nav-link {{ str_contains(strtolower($title), 'penilaian') ? '' : 'collapsed' }}" href="{{ route('penguruses.index') }}">
+                    <i class="bi bi-people-fill"></i><span style="color :#000000">Kuesioner</span><i></i>
                 </a>
-            </li><!-- End Admin Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(strtolower($title), 'psiko') ? '' : 'collapsed' }}" href="{{ route('penguruses.psikologi') }}">
-                    <i class="bi bi-people-fill"></i><span style="color :#000000">Psikologi</span><i></i>
-                </a>
-            </li><!-- End Pengurus Nav -->
+            </li><!-- End Kuesioner Nav -->
 
             <li class="nav-heading">Pages</li>
 

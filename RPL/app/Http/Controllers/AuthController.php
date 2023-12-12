@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Pengurus;
+use App\Models\Organisasi;
+use App\Models\Divisi;
+use App\Models\Jabatan;
+use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Auth;
@@ -109,7 +113,18 @@ class AuthController extends Controller
 
     public function Pengurus()
     {
-        return view('auth.create_pengurus');
+        $organisasi = Organisasi::orderBy('nama_organisasi','asc')->where('status','!=','0')->get()->pluck('nama_organisasi','id');
+        $divisi = Divisi::orderBy('nama_divisi', 'asc')->where('status', '=', '1')->get()->pluck('nama_divisi', 'id');
+        $jabatan = Jabatan::orderBy('nama_jabatan', 'asc')->where('status', '=', '1')->get()->pluck('nama_jabatan', 'id');
+        $programStudi = ProgramStudi::orderBy('nama_program_studi', 'asc')->where('status', '=', '1')->get()->pluck('nama_program_studi', 'id');
+
+        return view('auth.create_pengurus', [
+            'organisasis' => $organisasi,
+            'divisis' => $divisi,
+            'jabatans' => $jabatan,
+            'programStudis' => $programStudi,
+        ]);
+
     }
 
     public function CreatePengurus(Request $request)
@@ -117,35 +132,39 @@ class AuthController extends Controller
         $request->validate([
             'Nim' => 'required',
             'Nama' => 'required',
-            'Organisasi' => 'required',
-            'Divisi' => 'required',
-            'Jabatan' => 'required',
-            'Prodi' => 'required',
+            'organisasi_id' => 'required',
+            'divisi_id' => 'required',
+            'jabatan_id' => 'required',
+            'prodi_id' => 'required',
             'Password' => 'required',
+            'PasswordConfirmation' => 'required|same:Password'
         ], [
             'Nim.required' => 'Nim wajib diisi.',
             'Nama.required' => 'Nama wajib diisi.',
-            'Organisasi.required' => 'Organisasi wajib diisi.',
-            'Divisi.required' => 'Divisi wajib diisi.',
-            'Jabatan.required' => 'Jabatan wajib diisi.',
-            'Prodi.required' => 'Prodi wajib diisi.',
-            'Password.required' => 'Password wajib diisi.'
+            'organisasi_id.required' => 'Organisasi wajib diisi.',
+            'divisi_id.required' => 'Divisi wajib diisi.',
+            'jabatan_id.required' => 'Jabatan wajib diisi.',
+            'prodi_id.required' => 'Prodi wajib diisi.',
+            'Password.required' => 'Password wajib diisi.',
+            'PasswordConfirmation.same' => 'Konfimasi Password Tidak Sama',
         ]);
 
         $data = [
             'Nim' => $request->input('Nim'),
             'Nama' => $request->input('Nama'),
-            'id_organisasi' => $request->input('Organisasi'),
-            'id_divisi' => $request->input('Divisi'),
-            'id_jabatan' => $request->input('Jabatan'),
-            'id_prodi' => $request->input('Prodi'),
+            'organisasi_id' => $request->input('organisasi_id'),
+            'divisi_id' => $request->input('divisi_id'),
+            'jabatan_id' => $request->input('jabatan_id'),
+            'program_studi_id' => $request->input('prodi_id'),
             'Password' => $request->input('Password'),
             'Status' => '1',
         ];
 
-        Pengurus::create($data);
-
-        return redirect(route('auth.login_pengurus'))->with('success', 'Added!');
+        if(Pengurus::create($data)){
+            return redirect(route('auth.login_pengurus'))->with('success', 'Added!');
+        } else {
+            return redirect(route('auth.register'))->with('error', 'Error Register!');
+        }
     }
 
 }

@@ -81,29 +81,57 @@
                                     <input type="text" class="form-control" id="Nama" name="Nama">
                                 </div>
                                 <div class="col-12">
-                                    <label for="Organisasi" class="form-label">Organisasi <span
-                                            style="color:red">*</span></label>
-                                    <input type="text" class="form-control" id="Organisasi" name="Organisasi">
+                                <label for="Organisasi" class="form-label">Organisasi <span style="color: red;">*</span></label>
+                                <select name="organisasi_id" class="form-control" id="organisasi_id">
+                                    <option value="">-- Organisasi --</option>
+                                    @foreach ($organisasis as $organisasiID => $nama)
+                                    <option value="{{ $organisasiID }}" @selected(old('organisasi_id')==$organisasiID)>
+                                    {{ $nama }}
+                                    </option>
+                                    @endforeach
+                                </select>
                                 </div>
                                 <div class="col-12">
-                                    <label for="Divisi" class="form-label">Divisi <span
-                                            style="color:red">*</span></label>
-                                    <input type="text" class="form-control" id="Divisi" name="Divisi">
+                                <label for="Divisi" class="form-label">Divisi <span style="color: red;">*</span></label>
+                                <select name="divisi_id" class="form-control" id="divisi_id">
+                                    <option value="">-- Divisi --</option>
+                                    @foreach ($divisis as $divisiID => $nama)
+                                    <option value="{{ $divisiID }}" @selected(old('divisi_id')==$divisiID)>
+                                    {{ $nama }}
+                                    </option>
+                                    @endforeach
+                                </select>
                                 </div>
                                 <div class="col-12">
-                                    <label for="Jabatan" class="form-label">Jabatan <span
-                                            style="color:red">*</span></label>
-                                    <input type="text" class="form-control" id="Jabatan" name="Jabatan">
+                                <label for="Jabatan" class="form-label">Jabatan <span style="color: red;">*</span></label>
+                                <select name="jabatan_id" class="form-control" id="jabatan_id">
+                                    <option value="">-- Jabatan --</option>
+                                    @foreach ($jabatans as $jabatanID => $nama)
+                                    <option value="{{ $jabatanID }}" @selected(old('jabatan_id')==$jabatanID)>
+                                    {{ $nama }}
+                                    </option>
+                                    @endforeach
+                                </select>
                                 </div>
                                 <div class="col-12">
-                                    <label for="Prodi" class="form-label">Prodi <span
-                                            style="color:red">*</span></label>
-                                    <input type="text" class="form-control" id="Prodi" name="Prodi">
+                                <label for="Prodi" class="form-label">Program Studi <span style="color: red;">*</span></label>
+                                <select name="prodi_id" class="form-control" id="prodi_id">
+                                    <option value="">-- Program Studi --</option>
+                                    @foreach ($programStudis as $programStudiID => $nama)
+                                    <option value="{{ $programStudiID }}" @selected(old('prodi_id')==$programStudiID)>
+                                    {{ $nama }}
+                                    </option>
+                                    @endforeach
+                                </select>
                                 </div>
                                 <div class="col-12">
                                     <label for="Password" class="form-label">Password <span
                                             style="color:red">*</span></label>
                                     <input type="password" class="form-control" id="Password" name="Password">
+                                </div>
+                                <div class="col-12">
+                                    <label for="Password" class="form-label">Konfirmasi Password <span style="color:red">*</span></label>
+                                    <input type="password" class="form-control" id="PasswordConfirmation" name="PasswordConfirmation">
                                 </div>
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-primary">Create</button>

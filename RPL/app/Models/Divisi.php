@@ -17,11 +17,15 @@ class Divisi extends Model
         'organisasi_id',        
     ];
 
-    public function organisasis(){
-        return $this->hasMany(Organisasi::class);
+    public function organisasi(){
+        return $this->belongsTo(Organisasi::class);
     }
 
-    public function jabatan(){
-        return $this->belongsTo(Jabatan::class);
+    public function jabatans(){
+        return $this->hasMany(Jabatan::class);
+    }
+
+    public function penguruses(){
+        return $this->hasMany(Pengurus::class);
     }
 }

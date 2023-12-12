@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title','Menu Pengurus')
+@section('title','Laporan Pengurus')
 
 @section('contents')
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Pengurus</h1>
+        <h1>Kuesioner</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('Dashboard.dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active">Pengurus</li>
+                <li class="breadcrumb-item active">Kuesioner</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -57,21 +57,14 @@
                                     <td>{{ $pengurus->Nama }}</td>
                                     <td>{{ ($pengurus->organisasi != null) ? $pengurus->organisasi->nama_organisasi :
                                         ''}}</td>
-                                        <td>{{ ($pengurus->divisi != null) ? $pengurus->divisi->nama_divisi : '' }}
+                                    <td> {{ ($pengurus->divisi != null) ? $pengurus->divisi->nama_divisi : '' }} </td>
+                                    <td> {{ ($pengurus->jabatan != null) ? $pengurus->jabatan->nama_jabatan : ''}} </td>
+                                    <td> {{ ($pengurus->prodi != null) ? $pengurus->prodi->nama_program_studi : ''}}
                                     </td>
-                                    <td>{{ ($pengurus->jabatan != null) ? $pengurus->jabatan->nama_jabatan : ''}}</td>
-                                    <td>{{ ($pengurus->prodi != null) ? $pengurus->prodi->nama_program_studi : ''}}</td>
                                     <td>
-                                        <a href="{{ route('pengurus.edit', ['nim' => $pengurus->Nim]) }}"
-                                            class="btn btn-warning ">Edit</a>
-                                        <a class="btn btm-sm btn-danger delete-btn"
-                                            data-id="{{ $pengurus->Nim }}">Delete</a>
-                                        <form id="delete-row-{{ $pengurus->Nim }}"
-                                            action="{{ route('pengurus.destroy', ['nim' => $pengurus->Nim]) }}"
-                                            method="POST">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            @csrf
-                                        </form>
+                                        <a href="{{ route('laporans.detail', ['Nim' => $pengurus->Nim]) }}"
+                                            class="ri-edit-box-line" style="font-size: 20px"></a>
+                                    </td>
                                     </td>
                                 </tr>
                                 @empty
@@ -98,34 +91,6 @@
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const deleteLinks = document.querySelectorAll('a.delete-btn');
-
-        deleteLinks.forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const pengurusId = this.getAttribute('data-id');
-                console.log(pengurusId)
-                Swal.fire({
-                    title: 'Yakin Hapus Data?',
-                    text: 'Data tidak akan bisa dikembalikan!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        const form = document.getElementById(delete-row-${pengurusId});
-                        form.submit();
-                    }
-                });
-            });
-        });
-    });
-</script>
 
 <!-- ... (bagian lain dari kode HTML Anda) ... -->
 @endsection

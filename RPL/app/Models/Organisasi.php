@@ -20,7 +20,7 @@ class Organisasi extends Model
         return $this->hasMany(Pengurus::class);
     }
 
-    public function divisi(){
-        return $this->belongsTo(Pengurus::class);
+    public function divisis(){
+        return $this->hasMany(Divisi::class);
     }
 }
